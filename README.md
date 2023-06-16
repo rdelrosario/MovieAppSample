@@ -6,7 +6,7 @@ To test, replace the value in the **ApiKey** property in **Helpers/Config.cs** w
 
 
 
-## Third-parties Libraries used
+## Third-parties libraries used
 - **[FFImageLoading](https://github.com/luberda-molinet/FFImageLoading)** - Library to load images quickly & easily on Xamarin.iOS, Xamarin.Android, Xamarin.Forms, Xamarin.Mac / Xamarin.Tizen and Windows (UWP, WinRT)
 
 - **[PropertyChanged.Fody](https://github.com/Fody/PropertyChanged)** - Handles property changed events.      
