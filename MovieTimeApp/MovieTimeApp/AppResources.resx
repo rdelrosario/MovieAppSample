@@ -40,7 +40,7 @@
 		<value>Please check your Internet connection</value>
 	  </data>
 	  <data name="ApiKeyErrorMessage" xml:space="preserve">
-		<value>Unauthorized Access. Make sure you specified a valid ApiKey in Config.cs</value>
+		<value>Unauthorized Access. Make sure you specified a valid ApiKey in Helpers/Config.cs</value>
 	  </data>
 </root>
 
