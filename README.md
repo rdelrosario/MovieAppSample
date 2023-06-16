@@ -1,6 +1,6 @@
 # MovieAppSample
 
-To test, replace the value in the **ApiKey** property in Config.cs with a valid api key
+To test, replace the value in the **ApiKey** property in **Helpers/Config.cs** with a valid api key
 
 <img width="1000" src="assets/banner.png" />
 
