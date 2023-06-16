@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<popup:PopupPage
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:prism="http://prismlibrary.com" 
+                 prism:ViewModelLocator.AutowireViewModel="True"
+                 Padding="10"
+                 xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:resource="clr-namespace:MovieTimeApp"
+                 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:messier16="clr-namespace:Messier16.Forms.Controls;assembly=Messier16.Forms.Controls" xmlns:ratingbarcontrol="clr-namespace:RatingBarControl;assembly=RatingBarControl"
+                 x:Class="MovieTimeApp.Views.DetailsPage"
+                 CloseWhenBackgroundIsClicked="False">
+    <Frame BackgroundColor="DimGray"
+           CornerRadius="20"
+           Padding="0">
+    <StackLayout HorizontalOptions="FillAndExpand" 
+                 VerticalOptions="FillAndExpand"
+                 Padding="15,10,15,15"
+                 BindingContext="{Binding Movie}">
+         <Button Text="x"
+                 Margin="{OnPlatform Default='0,-20,-20,0', Android=0}"
+                 Command="{prism:GoBack}"
+                 HorizontalOptions="EndAndExpand"
+                 BackgroundColor="{StaticResource PrimaryVariant}"
+                 TextColor="{StaticResource Secondary}"
+                 Padding="{OnPlatform Default='0', Android='0,-3,0,0'}"
+                 HeightRequest="23"
+                 WidthRequest="25"
+                 FontSize="{OnPlatform Default='30', Android='20'}"
+                 CornerRadius="13"/>
+
+        <ffimageloading:CachedImage Source="{Binding PosterPath, Converter={StaticResource PathToImageUrlConverter}}"
+                                Aspect="Fill"
+                                DownsampleToViewSize="true"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+            <ffimageloading:CachedImage.Transformations>
+                 <fftransformations:RoundedTransformation Radius="20"/>
+            </ffimageloading:CachedImage.Transformations>
+        </ffimageloading:CachedImage>
+
+         <Label Text="{Binding Title}"
+                TextColor="{StaticResource Secondary}"
+                FontSize="Large"
+                FontAttributes="Bold"/>
+
+        <Label LineBreakMode="WordWrap"
+               TextColor="{StaticResource Secondary}"
+               FontSize="Small">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static resource:AppResources.Released}" FontAttributes="Bold" TextColor="Gray" />
+                    <Span Text=": " TextColor="Gray" />
+                    <Span Text="{Binding ReleaseDate}"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <ratingbarcontrol:RatingBar StarHeightRequest="25" 
+                                    StarWidthRequest="25"
+                                    Spacing="0"
+                                    EmptyStarImage="star"
+                                    SelectedStarValue="{Binding VoteAverage, Converter={StaticResource RatingToDisplayRatingConverter}}"
+                                    IsEnabled="False"
+                                    FillStarImage="star_filled" />
+
+        <Label FontAttributes="Bold" 
+               TextColor="{StaticResource PrimaryVariant}"
+               FontSize="Small">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{Binding VoteCount}" />
+                    <Span Text=" " />
+                    <Span Text="{x:Static resource:AppResources.Ratings}" FontAttributes="Bold" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <ScrollView HeightRequest="140">
+            <Label Text="{Binding Overview}"
+                    TextColor="{StaticResource Secondary}"
+                    FontSize="Small"/>
+        </ScrollView>
+
+         <StackLayout Orientation="Horizontal"
+                      Spacing="30"
+                      Padding="0,10,0,0">
+            <Button Text="{x:Static resource:AppResources.Back}"
+                    BorderColor="{StaticResource PrimaryVariant}"
+                    BorderWidth="1"
+                    TextColor="{StaticResource Secondary}"
+                    Command="{prism:GoBack}"
+                    CornerRadius="10"
+                    HeightRequest="40"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="Transparent"/>
+
+            <Button Text="{x:Static resource:AppResources.ViewTrailer}"
+                    BackgroundColor="{StaticResource PrimaryVariant}"
+                    CornerRadius="10"
+                    HeightRequest="40"
+                    TextColor="{StaticResource Secondary}"
+                    HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+  </StackLayout>
+ </Frame>
+</popup:PopupPage>

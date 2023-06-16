@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication  xmlns:prism="http://prismlibrary.com"
+                         xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:converters="clr-namespace:MovieTimeApp.Helpers.Converters"
+                          xmlns:ioc="clr-namespace:Prism.Ioc;assembly=Prism.Forms"
+                         x:Class="MovieTimeApp.App">
+    <prism:PrismApplication.Resources>
+        <ResourceDictionary>
+             <Color x:Key="Primary">Black</Color>
+             <Color x:Key="PrimaryVariant">#6109C7</Color>
+             <Color x:Key="Secondary">White</Color>
+
+              <ioc:ContainerProvider x:TypeArguments="converters:PathToImageUrlConverter"
+                                   x:Key="PathToImageUrlConverter" />
+
+            <ioc:ContainerProvider x:TypeArguments="converters:RatingToDisplayRatingConverter"
+                                    x:Key="RatingToDisplayRatingConverter" />
+
+                <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+            </Style>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+            </Style>
+        </ResourceDictionary>
+    </prism:PrismApplication.Resources>
+</prism:PrismApplication>

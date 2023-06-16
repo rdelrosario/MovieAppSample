@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:MovieTimeApp.Models"
+    xmlns:vm="clr-namespace:MovieTimeApp.ViewModels"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    x:Class="MovieTimeApp.Views.HomePage">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label TextColor="{StaticResource PrimaryVariant}"
+                   FontSize="Large"
+                   x:Name="AppTitle"
+                   HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+           <CollectionView ItemsSource="{Binding Movies}"
+                           BackgroundColor="{StaticResource Primary}">
+                <CollectionView.ItemTemplate>
+                     <DataTemplate>
+                         <StackLayout>
+                                <Label Text="{Binding Key}"
+                                       TextColor="{StaticResource Secondary}"
+                                       FontSize="Small"
+                                       Margin="20,5"/>
+
+                                 <ScrollView Orientation="Horizontal">
+                                     <StackLayout BindableLayout.ItemsSource="{Binding .}"
+                                                  HeightRequest="210"
+                                                  Margin="10,0,0,0"
+                                                  Orientation="Horizontal"
+                                                  Spacing="20">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                        <ffimageloading:CachedImage x:DataType="model:Movie"
+                                                                    Source="{Binding PosterPath, Converter={StaticResource PathToImageUrlConverter}}"
+                                                                    Aspect="Fill"
+                                                                    DownsampleToViewSize="true"
+                                                                    WidthRequest="140">
+                                                               <ffimageloading:CachedImage.Transformations>
+                                                                    <fftransformations:RoundedTransformation BorderHexColor="#6109C7" BorderSize="5" Radius="10" CropHeightRatio="0" CropWidthRatio="0"/>
+                                                            </ffimageloading:CachedImage.Transformations>
+                                                                <ffimageloading:CachedImage.GestureRecognizers>
+                                                                    <TapGestureRecognizer
+                                                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=GoToMovieDetailsCommand}"
+                                                                                        CommandParameter="{Binding .}"/>
+                                                                    </ffimageloading:CachedImage.GestureRecognizers>
+                                                            </ffimageloading:CachedImage>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                     </StackLayout>
+                            </ScrollView>
+                         </StackLayout>
+                      </DataTemplate>
+                  </CollectionView.ItemTemplate>
+            </CollectionView>
+</ContentPage>
+
